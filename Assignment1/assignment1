@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment #1 - HTML5 Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        .error { color: red; font-size: 14px; }
+        .output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+
+    <h2>HTML5 Form Assignment</h2>
+    
+    <form id="userForm">
+        <!-- Full Name -->
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" 
+               required maxlength="80" size="60" autofocus>
+
+        <!-- Password -->
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required 
+               pattern="[a-zA-Z0-9_,.\-:;?!]{8,20}" title="8-20 characters, letters, numbers, and _,.-:;?!">
+
+        <!-- Password Again -->
+        <label for="passwordConfirm">Password Again</label>
+        <input type="password" id="passwordConfirm" name="passwordConfirm" required>
+
+        <!-- Gender -->
+        <label>Gender</label>
+        <input type="radio" name="gender" value="Male" required> Male
+        <input type="radio" name="gender" value="Female"> Female
+        <input type="radio" name="gender" value="Other"> Other
+
+        <!-- Hobbies -->
+        <label>Hobbies</label>
+        <input type="checkbox" name="hobbies" value="Games"> Games
+        <input type="checkbox" name="hobbies" value="Music"> Music
+        <input type="checkbox" name="hobbies" value="Sports"> Sports
+        <input type="checkbox" name="hobbies" value="TV"> TV
+
+        <!-- Birth Date -->
+        <label for="birthDate">Birth Date</label>
+        <input type="date" id="birthDate" name="birthDate">
+
+        <!-- Height (Range + Number) -->
+        <label>Height (cm)</label>
+        <input type="range" id="heightRange" name="height" min="40" max="300" value="170">
+        <input type="number" id="heightNumber" min="40" max="300" value="170">
+
+        <!-- Favorite Color -->
+        <label for="color">Favorite Color</label>
+        <input type="color" id="color" name="color">
+
+        <!-- Home Country -->
+        <label for="country">Home Country</label>
+        <select id="country" name="country">
+            <option value="Finland" selected>Finland</option>
+            <option value="Sweden">Sweden</option>
+            <option value="Norway">Norway</option>
+            <option value="Denmark">Denmark</option>
+            <option value="Iceland">Iceland</option>
+            <option value="Estonia">Estonia</option>
+            <option value="Latvia">Latvia</option>
+            <option value="Lithuania">Lithuania</option>
+            <option value="Russia">Russia</option>
+        </select>
+
+        <!-- Profession -->
+        <label for="profession">Profession</label>
+        <input type="text" id="profession" name="profession" list="professions">
+        <datalist id="professions">
+            <option value="Teacher"></option>
+            <option value="Nurse"></option>
+            <option value="Plumber"></option>
+            <option value="Bureaucrat"></option>
+        </datalist>
+
+        <!-- Message -->
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" cols="60" placeholder="Write your message here..." maxlength="1000" required></textarea>
+
+        <!-- Submit Button -->
+        <button type="submit">Send</button>
+    </form>
+
+    <!-- Output Section -->
+    <div class="output" id="output"></div>
+
+    <script>
+        document.getElementById("userForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let fullName = document.getElementById("fullName").value;
+            let password = document.getElementById("password").value;
+            let passwordConfirm = document.getElementById("passwordConfirm").value;
+            let gender = document.querySelector('input[name="gender"]:checked');
+            let hobbies = Array.from(document.querySelectorAll('input[name="hobbies"]:checked')).map(h => h.value);
+            let birthDate = document.getElementById("birthDate").value;
+            let height = document.getElementById("heightNumber").value;
+            let color = document.getElementById("color").value;
+            let country = document.getElementById("country").value;
+            let profession = document.getElementById("profession").value;
+            let message = document.getElementById("message").value;
+
+            // Validate Passwords
+            if (password !== passwordConfirm) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            // Display Output
+            document.getElementById("output").innerHTML = `
+                <h3>Form Submission Result</h3>
+                <p><strong>Full Name:</strong> ${fullName}</p>
+                <p><strong>Password:</strong> ${"*".repeat(password.length)}</p>
+                <p><strong>Gender:</strong> ${gender ? gender.value : "Not selected"}</p>
+                <p><strong>Hobbies:</strong> ${hobbies.length > 0 ? hobbies.join(", ") : "None"}</p>
+                <p><strong>Birth Date:</strong> ${birthDate}</p>
+                <p><strong>Height:</strong> ${height} cm</p>
+                <p><strong>Favorite Color:</strong> <span style="color:${color}">${color}</span></p>
+                <p><strong>Home Country:</strong> ${country}</p>
+                <p><strong>Profession:</strong> ${profession}</p>
+                <p><strong>Message:</strong> ${message}</p>
+            `;
+        });
+
+        // Sync Range and Number Inputs
+        document.getElementById("heightRange").addEventListener("input", function() {
+            document.getElementById("heightNumber").value = this.value;
+        });
+
+        document.getElementById("heightNumber").addEventListener("input", function() {
+            document.getElementById("heightRange").value = this.value;
+        });
+    </script>
+
+</body>
+</html>
