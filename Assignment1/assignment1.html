@@ -7,7 +7,7 @@
     <style>
         body { font-family: Arial, sans-serif; max-width: 600px; margin: auto; }
         label { display: block; margin-top: 10px; font-weight: bold; }
-        .error { color: red; font-size: 14px; }
+        .error { color: red; font-size: 14px; margin-top: 5px; }
         .output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
     </style>
 </head>
@@ -23,11 +23,11 @@
 
         <!-- Password -->
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" required 
-               pattern="[a-zA-Z0-9_,.\-:;?!]{8,20}" title="8-20 characters, letters, numbers, and _,.-:;?!">
+        <input type="password" id="password" name="password" required>
+        <div id="passwordError" class="error"></div> <!-- Error message will be displayed here -->
 
         <!-- Password Again -->
-        <label for="passwordConfirm">Password Again</label>
+        <label for="passwordConfirm">Confirm Password</label>
         <input type="password" id="passwordConfirm" name="passwordConfirm" required>
 
         <!-- Gender -->
@@ -92,20 +92,42 @@
     <div class="output" id="output"></div>
 
     <script>
+        // Constants for validation
+        const passwordField = document.getElementById("password");
+        const passwordError = document.getElementById("passwordError");
+        const passwordConfirmField = document.getElementById("passwordConfirm");
+
+        /**
+         * Validates the password in real-time.
+         */
+        function validatePassword() {
+            const passwordPattern = /^[a-zA-Z0-9_,.\-:;?!]{8,20}$/;
+            const passwordValue = passwordField.value;
+
+            if (!passwordPattern.test(passwordValue)) {
+                passwordError.textContent = "Password length must be 8-20 characters. Allowed password characters are a-z, A-Z, 0-9 and _,.-:;?!";
+            } else {
+                passwordError.textContent = "";
+            }
+        }
+
+        // Add real-time password validation
+        passwordField.addEventListener("input", validatePassword);
+
         document.getElementById("userForm").addEventListener("submit", function(event) {
             event.preventDefault();
 
-            let fullName = document.getElementById("fullName").value;
-            let password = document.getElementById("password").value;
-            let passwordConfirm = document.getElementById("passwordConfirm").value;
-            let gender = document.querySelector('input[name="gender"]:checked');
-            let hobbies = Array.from(document.querySelectorAll('input[name="hobbies"]:checked')).map(h => h.value);
-            let birthDate = document.getElementById("birthDate").value;
-            let height = document.getElementById("heightNumber").value;
-            let color = document.getElementById("color").value;
-            let country = document.getElementById("country").value;
-            let profession = document.getElementById("profession").value;
-            let message = document.getElementById("message").value;
+            const fullName = document.getElementById("fullName").value;
+            const password = passwordField.value;
+            const passwordConfirm = passwordConfirmField.value;
+            const gender = document.querySelector('input[name="gender"]:checked');
+            const hobbies = Array.from(document.querySelectorAll('input[name="hobbies"]:checked')).map(h => h.value);
+            const birthDate = document.getElementById("birthDate").value;
+            const height = document.getElementById("heightNumber").value;
+            const color = document.getElementById("color").value;
+            const country = document.getElementById("country").value;
+            const profession = document.getElementById("profession").value;
+            const message = document.getElementById("message").value;
 
             // Validate Passwords
             if (password !== passwordConfirm) {
