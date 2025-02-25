@@ -1,0 +1,32 @@
+[
+    {
+        "question": "1. What is the capital of Finland?",
+        "options": [
+            "Helsinki", 
+            "Stockholm", 
+            "Oslo", 
+            "Copenhagen"
+        ],
+        "answer": "Helsinki"
+    },
+    {
+        "question": "2. Which planet is closest to the Sun?",
+        "options": [
+            "Venus", 
+            "Earth", 
+            "Mercury", 
+            "Mars"
+        ],
+        "answer": "Mercury"
+    },
+    {
+        "question": "3. What was the first studio album of the famous indie rock band The Killers?",
+        "options": [
+            "Sam's Town",
+            "Day & Age",
+            "Sawdust",
+            "Hot Fuss"
+        ],
+        "answer": "Hot Fuss"
+    }
+]

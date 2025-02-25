@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.feedback {
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+#result {
+    font-size: 18px;
+}
+
+.btn {
+    font-size: 18px;
+    padding: 10px;
+}
