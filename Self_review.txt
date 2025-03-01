@@ -1,3 +1,3 @@
-#1 https://github.com/hamk-js-intim23a6/meuronenpauli/Assignment1/index.hmtl 1
-#2 https://github.com/hamk-js-intim23a6/meuronenpauli/Assignment2/index.hmtl 1
-#3 https://github.com/hamk-js-intim23a6/meuronenpauli/Assignment3/index.hmtl 1
+#1 https://github.com/hamk-js-intim23a6/meuronenpauli/tree/205ddd5f4ab8a629c2f56a4d8c998eec0cc9e381/Assignment1 1
+#2 https://github.com/hamk-js-intim23a6/meuronenpauli/tree/205ddd5f4ab8a629c2f56a4d8c998eec0cc9e381/Assignment2 1
+#3 https://github.com/hamk-js-intim23a6/meuronenpauli/tree/205ddd5f4ab8a629c2f56a4d8c998eec0cc9e381/Assignment3 1
